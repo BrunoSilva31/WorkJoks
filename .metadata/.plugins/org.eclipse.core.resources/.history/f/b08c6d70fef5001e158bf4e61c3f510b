@@ -1,0 +1,64 @@
+package com.example.freela.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.freela.demo.entities.User;
+import com.example.freela.demo.repositories.UserRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	private UserRepository repository;
+	
+	private static final int CAPACIDADE_MEZANINO = 40;
+	private static final int CAPACIDADE_VARANDA = 35;
+	
+	public User insert(User obj) {
+		
+		validarHorario(obj.getFormattedDate());
+		
+		validarCapacidade(obj.getFormattedDate());
+		
+		return repository.save(obj);
+	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
+	public User update(Long id, User obj) {
+		
+		User existingUser = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com ID: " + id));
+		
+		validarHorario(obj.getFormattedDate());
+		
+		BeanUtils.copyProperties(obj, existingUser, "id");
+		
+		return repository.save(existingUser);
+	}
+	
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+		entity.setFormattedDate(obj.getFormattedDate());
+
+	}
+
+	public List<User> findAll(){
+		return repository.findAll();
+	}
+	
+	public User findById(Long id) {
+		Optional<User> obj = repository.findById(id);
+		return obj.get();
+	}
+}

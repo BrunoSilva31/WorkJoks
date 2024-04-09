@@ -1,0 +1,12 @@
+package com.example.freela.demo.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.example.freela.demo.entities.User;
+
+public interface UserRepository extends JpaRepository<User, Long>{
+	
+	@Query("SELECT COUNT(u) FROM User u WHERE u.horarioAgendamento = ?1 AND u.ambiente = ?2")
+	long countByHorarioAgendamentoAndAmbiente(String horarioAgendamento, String ambiente);
+}

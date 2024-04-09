@@ -1,0 +1,29 @@
+package com.example.freela.demo.config;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import com.example.freela.demo.entities.User;
+import com.example.freela.demo.repositories.UserRepository;
+
+@Configuration
+@Profile("test")
+public class TestConfig implements CommandLineRunner{
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		User u1 = new User(null, "Vero", "vero@email.com", "7894569", "999999", LocalDateTime.parse("25/11/2024 19:30"), "mezanino");
+		
+		userRepository.saveAll(Arrays.asList(u1, u2));
+	}
+	
+	
+}

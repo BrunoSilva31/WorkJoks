@@ -1,0 +1,5 @@
+package com.example.freela.demo.model;
+
+public class Cliente {
+
+}

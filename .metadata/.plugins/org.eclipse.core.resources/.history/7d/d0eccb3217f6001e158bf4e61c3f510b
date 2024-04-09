@@ -1,0 +1,35 @@
+package com.example.freela.demo.config;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import com.example.freela.demo.entities.User;
+import com.example.freela.demo.repositories.UserRepository;
+
+
+@Configuration
+@Profile("test")
+public class TestConfig implements CommandLineRunner{
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		@SuppressWarnings("deprecation")
+		User u1 = new User(null, "Vero", "vero@email.com", "7894569", "999999", new Date(), "mezanino");
+		
+		userRepository.saveAll(Arrays.asList(u1));
+	}
+	
+	
+}

@@ -1,0 +1,28 @@
+package com.example.freela.demo.config;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import com.example.freela.demo.entities.User;
+import com.example.freela.demo.repositories.UserRepository;
+
+@Configuration
+@Profile("test")
+public class TestConfig implements CommandLineRunner{
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		User u1 = new User(null, "Vero", "vero@email.com", "7894569", "999999", new Date());
+		
+		User u2 = new User(null, "Moimoi", "moimoi@email.com", "7891124", "88888", new Date());
+	}
+	
+	
+}
