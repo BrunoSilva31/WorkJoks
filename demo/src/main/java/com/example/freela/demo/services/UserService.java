@@ -28,6 +28,15 @@ public class UserService {
     public User insert(User obj) {
         validarHorario(obj.getFormattedDate());
         validarCapacidade(obj.getFormattedDate(), obj.getAmbiente());
+        
+        LocalDateTime horario = LocalDateTime.parse(obj.getFormattedDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        
+        if(horario.isBefore(LocalDateTime.now())) {
+        	throw new IllegalArgumentException("A data de agendamento passou");
+        }
+        
+        repository.deleteByDateBefore(LocalDateTime.now());
+        
         return repository.save(obj);
     }
     
