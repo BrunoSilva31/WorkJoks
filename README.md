@@ -20,12 +20,12 @@ This project is a Spring Boot application for managing customer reservations at 
 
 <h1 align="center"> API endpoints </h1>
 
-- `GET /customers`: Returns all customers and their reservations.
-- `GET /customers/{id}`: Returns details of a specific customer.
-- `POST /customers`: Creates a new customer with reservation.
-- `PUT /customers/{id}`: Updates details of an existing customer.
-- `DELETE /customers/{id}`: Deletes a customer and their reservation.
-- `DELETE /customers`: Deletes all past reservations.
+- `GET /clientes`: Returns all customers and their reservations.
+- `GET /clientes/{id}`: Returns details of a specific customer.
+- `POST /clientes`: Creates a new customer with reservation.
+- `PUT /clientes/{id}`: Updates details of an existing customer.
+- `DELETE /clientes/{id}`: Deletes a customer and their reservation.
+- `DELETE /clientes`: Deletes all past reservations.
 
 ## Example POST Request
 
